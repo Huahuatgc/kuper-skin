@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuper Style Dashboard Redesign</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Phosphor Icons (Material 风格图标替代品) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- 引入 Outfit 字体 (类似 Google Sans/Product Sans 的几何无衬线体) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #121212; /* 模拟 Android 深色模式 */
+            color: #E2E2E2;
+        }
+        /* 隐藏滚动条 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .fade-in { animation: fadeIn 0.3s cubic-bezier(0.2, 0, 0.2, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Material Ripple 模拟 */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+        .ripple:active::after {
+            width: 200%;
+            height: 200%;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Kuper/Material Design 3 Dark Theme Palette
+                        md: {
+                            base: '#121212',       /* 背景 */
+                            surface: '#1E1E1E',    /* 卡片背景 */
+                            surface2: '#2C2C2C',   /* 浅色卡片 */
+                            primary: '#B0C4DE',    /* 主色 (淡蓝/紫) - Kuper 常用 */
+                            onPrimary: '#182B3A',
+                            secondary: '#CFBCFF',  /* 辅助色 */
+                            tertiary: '#EFB8C8',
+                            outline: '#444746',
+                        }
+                    },
+                    borderRadius: {
+                        '3xl': '1.75rem',      /* Material 3 大圆角 */
+                        '4xl': '2.25rem',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-screen flex justify-center items-center bg-[#000000]">
+
+    <!-- 手机外壳 -->
+    <div class="w-full max-w-md h-full sm:h-[95vh] bg-md-base flex flex-col relative shadow-2xl overflow-hidden sm:rounded-[32px] sm:border-[8px] sm:border-[#333]">
+        
+        <!-- 状态栏 -->
+        <div class="h-10 w-full flex justify-between items-center px-6 shrink-0 z-20 pt-2">
+            <span class="text-xs font-medium text-gray-400">10:24</span>
+            <div class="flex gap-2 text-gray-400">
+                <i class="ph-fill ph-wifi-high text-sm"></i>
+                <i class="ph-fill ph-battery-full text-sm"></i>
+            </div>
+        </div>
+
+        <!-- 界面 1: Dashboard Home (还原 Kuper 主页) -->
+        <main id="view-home" class="flex-1 overflow-y-auto no-scrollbar pb-24 px-4 fade-in">
+            
+            <!-- Hero Header Section -->
+            <header class="mt-4 mb-6 relative">
+                <div class="bg-md-surface2 rounded-3xl p-6 relative overflow-hidden h-48 flex flex-col justify-end items-start ripple cursor-pointer group">
+                    <!-- 装饰性背景圆 -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-md-primary opacity-20 rounded-full blur-3xl group-hover:scale-150 transition duration-700"></div>
+                    
+                    <div class="z-10 w-full">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="w-14 h-14 bg-gradient-to-br from-md-primary to-blue-600 rounded-2xl shadow-lg mb-3 flex items-center justify-center text-md-onPrimary text-2xl font-bold">
+                                <i class="ph-fill ph-hexagon"></i>
+                            </div>
+                            <span class="px-3 py-1 bg-black/30 backdrop-blur rounded-full text-[10px] font-medium text-white/80 border border-white/10">v2.4.0</span>
+                        </div>
+                        <h1 class="text-3xl font-bold text-white tracking-tight">Kuper</h1>
+                        <p class="text-gray-400 text-sm mt-1">Material Design Icon Pack</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Actions Grid -->
+            <section class="grid grid-cols-2 gap-3 mb-3">
+                <!-- Apply Card -->
+                <div onclick="switchTab('icons')" class="bg-md-primary text-md-onPrimary p-5 rounded-3xl h-40 flex flex-col justify-between ripple cursor-pointer hover:brightness-110 transition">
+                    <div class="flex justify-between items-start">
+                        <span class="font-bold text-lg">Apply</span>
+                        <i class="ph-bold ph-arrow-up-right text-xl opacity-70"></i>
+                    </div>
+                    <div>
+                        <i class="ph-fill ph-paint-brush-broad text-3xl mb-2"></i>
+                        <p class="text-xs font-medium opacity-80 leading-tight">24 Launchers<br>Supported</p>
+                    </div>
+                </div>
+
+                <!-- Icons Card -->
+                <div class="bg-md-surface p-5 rounded-3xl h-40 flex flex-col justify-between ripple cursor-pointer border border-md-outline/30 hover:bg-md-surface2 transition">
+                    <div class="flex justify-between items-start">
+                        <span class="font-bold text-lg text-white">Icons</span>
+                        <span class="text-xs bg-md-secondary text-black font-bold px-2 py-0.5 rounded-md">NEW</span>
+                    </div>
+                    <div>
+                        <div class="flex -space-x-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 border-2 border-md-surface"></div>
+                            <div class="w-8 h-8 rounded-full bg-purple-500 border-2 border-md-surface"></div>
+                            <div class="w-8 h-8 rounded-full bg-green-500 border-2 border-md-surface flex items-center justify-center text-[10px] font-bold">+5k</div>
+                        </div>
+                        <p class="text-xs text-gray-400">Total Icons</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wallpapers Section (Long Card) -->
+            <section class="mb-3">
+                <div class="bg-md-surface rounded-3xl p-1 overflow-hidden ripple cursor-pointer border border-md-outline/30 group">
+                    <div class="relative h-32 w-full rounded-[20px] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500" alt="Wallpaper">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Wallpapers</h3>
+                                <p class="text-xs text-gray-300">240+ Cloud based walls</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/20 backdrop-blur w-10 h-10 rounded-full flex items-center justify-center text-white">
+                            <i class="ph-fill ph-image text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Secondary Actions Grid -->
+            <section class="grid grid-cols-3 gap-3">
+                <div class="bg-md-surface2 p-4 rounded-3xl flex flex-col items-center justify-center gap-2 aspect-square ripple cursor-pointer">
+                    <i class="ph-fill ph-question text-2xl text-md-tertiary"></i>
+                    <span class="text-xs font-medium text-gray-300">FAQs</span>
+                </div>
+                 <div class="bg-md-surface2 p-4 rounded-3xl flex flex-col items-center justify-center gap-2 aspect-square ripple cursor-pointer">
+                    <i class="ph-fill ph-paper-plane-tilt text-2xl text-md-secondary"></i>
+                    <span class="text-xs font-medium text-gray-300">Request</span>
+                </div>
+                 <div class="bg-md-surface2 p-4 rounded-3xl flex flex-col items-center justify-center gap-2 aspect-square ripple cursor-pointer">
+                    <i class="ph-fill ph-gear text-2xl text-gray-400"></i>
+                    <span class="text-xs font-medium text-gray-300">Settings</span>
+                </div>
+            </section>
+        </main>
+
+
+        <!-- 界面 2: Icons View (Material List Style) -->
+        <main id="view-icons" class="hidden flex-1 overflow-y-auto no-scrollbar pb-24 px-4 fade-in bg-md-base">
+            
+            <!-- Standard Material 3 Top Bar -->
+            <header class="sticky top-0 bg-md-base/90 backdrop-blur z-20 pt-4 pb-2 mb-2 flex flex-col">
+                 <div class="flex items-center gap-4 mb-4">
+                    <button onclick="switchTab('home')" class="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition">
+                        <i class="ph ph-arrow-left text-xl"></i>
+                    </button>
+                    <h2 class="text-2xl font-normal">Icons</h2>
+                    <div class="ml-auto flex gap-2">
+                         <button class="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition">
+                            <i class="ph ph-magnifying-glass text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Material Tabs -->
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                    <button class="px-5 py-2 bg-md-secondary text-md-base rounded-full text-sm font-bold whitespace-nowrap">All Icons</button>
+                    <button class="px-5 py-2 bg-md-surface border border-md-outline text-gray-300 rounded-full text-sm font-medium whitespace-nowrap">New</button>
+                    <button class="px-5 py-2 bg-md-surface border border-md-outline text-gray-300 rounded-full text-sm font-medium whitespace-nowrap">System</button>
+                    <button class="px-5 py-2 bg-md-surface border border-md-outline text-gray-300 rounded-full text-sm font-medium whitespace-nowrap">Google</button>
+                    <button class="px-5 py-2 bg-md-surface border border-md-outline text-gray-300 rounded-full text-sm font-medium whitespace-nowrap">Games</button>
+                </div>
+            </header>
+
+            <!-- Grid of Icons -->
+            <div class="grid grid-cols-4 gap-4 mt-2">
+                <!-- Icon Item Template -->
+                <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer relative overflow-hidden">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-lg shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Chrome</span>
+                </div>
+
+                 <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-full shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Phone</span>
+                </div>
+
+                <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-yellow-500 to-orange-400 rounded-xl shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Notes</span>
+                </div>
+
+                <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-red-500 to-pink-500 rounded-lg shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Music</span>
+                </div>
+
+                <!-- More placeholders -->
+                <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-gradient-to-tr from-purple-500 to-indigo-500 rounded-full shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Podcast</span>
+                </div>
+
+                 <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-gray-600 rounded-lg shadow-inner flex items-center justify-center">
+                            <i class="ph-fill ph-gear text-white"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Settings</span>
+                </div>
+            </div>
+            
+            <!-- Category Header within list -->
+            <h3 class="mt-6 mb-3 text-sm font-bold text-md-primary px-1">System Apps</h3>
+            <div class="grid grid-cols-4 gap-4">
+                 <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-blue-400 rounded-lg shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Files</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <div class="w-16 h-16 bg-md-surface2 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-md-surface transition cursor-pointer">
+                        <div class="w-10 h-10 bg-teal-400 rounded-lg shadow-inner"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 truncate w-full text-center">Camera</span>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Navigation Bar (Material 3 Style) -->
+        <nav class="absolute bottom-0 w-full bg-md-surface2/90 backdrop-blur pt-3 pb-5 px-6 flex justify-around items-center z-30 rounded-t-3xl border-t border-white/5">
+            <!-- Nav Pill: Home (Active) -->
+            <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center gap-1 group">
+                <div id="pill-home" class="px-5 py-1.5 rounded-full bg-md-secondary text-md-onPrimary transition-all duration-300">
+                    <i class="ph-fill ph-house text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-200">Home</span>
+            </button>
+            
+            <!-- Nav Pill: Icons -->
+            <button onclick="switchTab('icons')" id="nav-icons" class="flex flex-col items-center gap-1 group">
+                <div id="pill-icons" class="px-5 py-1.5 rounded-full bg-transparent text-gray-400 group-hover:text-gray-200 transition-all duration-300">
+                    <i class="ph ph-shapes text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-400 group-hover:text-gray-200">Icons</span>
+            </button>
+            
+            <!-- Nav Pill: Walls -->
+            <button class="flex flex-col items-center gap-1 group">
+                <div class="px-5 py-1.5 rounded-full bg-transparent text-gray-400 group-hover:text-gray-200 transition-all duration-300">
+                    <i class="ph ph-image text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-400 group-hover:text-gray-200">Walls</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            const home = document.getElementById('view-home');
+            const icons = document.getElementById('view-icons');
+            const pillHome = document.getElementById('pill-home');
+            const pillIcons = document.getElementById('pill-icons');
+
+            if (tabName === 'home') {
+                home.classList.remove('hidden');
+                icons.classList.add('hidden');
+                
+                // Active State for Home
+                pillHome.classList.add('bg-md-secondary', 'text-md-onPrimary');
+                pillHome.classList.remove('bg-transparent', 'text-gray-400');
+                
+                // Inactive State for Icons
+                pillIcons.classList.remove('bg-md-secondary', 'text-md-onPrimary');
+                pillIcons.classList.add('bg-transparent', 'text-gray-400');
+            } else {
+                icons.classList.remove('hidden');
+                home.classList.add('hidden');
+                
+                // Active State for Icons
+                pillIcons.classList.add('bg-md-secondary', 'text-md-onPrimary');
+                pillIcons.classList.remove('bg-transparent', 'text-gray-400');
+                
+                // Inactive State for Home
+                pillHome.classList.remove('bg-md-secondary', 'text-md-onPrimary');
+                pillHome.classList.add('bg-transparent', 'text-gray-400');
+            }
+        }
+    </script>
+</body>
+</html>

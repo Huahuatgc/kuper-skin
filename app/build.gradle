@@ -1,0 +1,144 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.google.devtools.ksp'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+android {
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            outputFileName = defaultConfig.applicationId + "-v${variant.versionName}-${variant.name}.apk"
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds true
+        disable 'MissingTranslation', 'GoogleAppIndexingWarning'
+    }
+
+    namespace MyApp.appId
+    defaultConfig {
+        buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
+        manifestPlaceholders = [
+                onesignal_app_id               : OneSignal.appId,
+                onesignal_google_project_number: OneSignal.googleProjectNumber
+        ]
+        applicationId MyApp.appId
+        minSdkVersion Versions.minSdk
+        compileSdk Versions.targetSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode MyApp.version
+        versionName MyApp.versionName
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+        consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
+        }
+    }
+
+    buildTypes {
+        buildTypes.each {
+            it.buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
+        }
+        release {
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    packagingOptions {
+        resources {
+            pickFirsts += [
+                    'META-INF/core_debug.kotlin_module',
+                    'META-INF/core_release.kotlin_module',
+                    'META-INF/library_debug.kotlin_module',
+                    'META-INF/library_release.kotlin_module'
+            ]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+    
+    // JUnit 5 配置
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+            all {
+                useJUnitPlatform()
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation(Libs.kuper) {
+        transitive = true
+    }
+    
+    // Material Design 3
+    implementation Libs.material
+    
+    // Coil - Image Loading
+    implementation Libs.coil
+    implementation Libs.coilCompose
+    
+    // Testing - JUnit 5
+    testImplementation Libs.junit5Api
+    testRuntimeOnly Libs.junit5Engine
+    testImplementation Libs.junit5Params
+    
+    // Testing - Kotest (Property-Based Testing)
+    testImplementation Libs.kotestRunner
+    testImplementation Libs.kotestAssertions
+    testImplementation Libs.kotestProperty
+    
+    // Testing - MockK
+    testImplementation Libs.mockk
+    androidTestImplementation Libs.mockkAndroid
+    
+    // Testing - Robolectric
+    testImplementation Libs.robolectric
+    
+    // Testing - Espresso (UI Testing)
+    androidTestImplementation Libs.espressoCore
+    androidTestImplementation Libs.espressoContrib
+    
+    // Testing - AndroidX Test
+    androidTestImplementation Libs.androidxTestCore
+    androidTestImplementation Libs.androidxTestRunner
+    androidTestImplementation Libs.androidxTestRules
+    
+    // TODO: Remove comment marks to enable
+    // implementation Libs.oneSignal
+}

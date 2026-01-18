@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ========== MikuBox Style Palette ========== -->
+    <!-- Primary Teal -->
+    <color name="miku_teal">#39C5BB</color>
+    <color name="miku_teal_light">#70F8EE</color>
+    <color name="miku_teal_dark">#00948B</color>
+
+    <!-- Accent Pink -->
+    <color name="miku_pink">#E558A8</color>
+    <color name="miku_pink_light">#FF8ADB</color>
+    <color name="miku_pink_dark">#B02479</color>
+
+    <!-- Backgrounds -->
+    <color name="miku_background_light">#F2FFFE</color> <!-- Very light teal tint -->
+    <color name="miku_surface_light">#FFFFFF</color>
+    <color name="miku_background_dark">#121C1C</color> <!-- Dark teal tint -->
+    <color name="miku_surface_dark">#1E2C2C</color>
+
+    <!-- ========== Light Theme Colors ========== -->
+    <color name="primary">@color/miku_teal</color>
+    <color name="primaryDark">@color/miku_teal_dark</color>
+    <color name="onPrimary">#FFFFFF</color>
+
+    <!-- Accent -->
+    <color name="accent">@color/miku_teal</color>
+    <color name="onAccent">#FFFFFF</color>
+
+    <!-- Surface -->
+    <color name="surface">@color/miku_surface_light</color>
+    <color name="onSurface">#202020</color>
+    <color name="onSurfaceVariant">#707070</color>
+
+    <!-- Background -->
+    <color name="background">@color/miku_background_light</color>
+    <color name="onBackground">#202020</color>
+
+    <!-- Bottom navigation -->
+    <color name="bottomNavActiveIndicator">@color/miku_teal_light</color>
+    <color name="navigation_bar_color">@color/miku_surface_light</color>
+
+    <!-- Snackbar -->
+    <color name="snackbarBackgroundColor">#323232</color>
+    <color name="snackbarTextColor">#FFFFFF</color>
+    <color name="snackbarButtonColor">@color/miku_teal_light</color>
+
+    <!-- ========== Dark Theme Colors ========== -->
+    <color name="darkThemePrimary">@color/miku_teal</color>
+    <color name="darkThemePrimaryDark">@color/miku_teal_dark</color>
+    <color name="darkThemeOnPrimary">#FFFFFF</color>
+
+    <!-- Accent -->
+    <color name="darkThemeAccent">@color/miku_teal_light</color>
+    <color name="darkThemeOnAccent">#003833</color>
+
+    <!-- Surface -->
+    <color name="darkThemeSurface">@color/miku_surface_dark</color>
+    <color name="darkThemeOnSurface">#E0E0E0</color>
+    <color name="darkThemeOnSurfaceVariant">#A0A0A0</color>
+
+    <!-- Background -->
+    <color name="darkThemeBackground">@color/miku_background_dark</color>
+    <color name="darkThemeOnBackground">#E0E0E0</color>
+
+    <!-- Snackbar -->
+    <color name="darkThemeSnackbarBackgroundColor">#3A3A3C</color>
+    <color name="darkThemeSnackbarTextColor">#FFFFFF</color>
+    <color name="darkThemeSnackbarButtonColor">@color/miku_teal_light</color>
+
+    <!-- ========== AMOLED Theme Colors ========== -->
+    <!-- True black for OLED screens but with Miku accents -->
+    <color name="amoledThemePrimary">@color/miku_pink</color>
+    <color name="amoledThemePrimaryDark">@color/miku_pink_dark</color>
+    <color name="amoledThemeOnPrimary">#FFFFFF</color>
+
+    <color name="amoledThemeAccent">@color/miku_teal_light</color>
+    <color name="amoledThemeOnAccent">#000000</color>
+
+    <color name="amoledThemeSurface">#000000</color>
+    <color name="amoledThemeOnSurface">#FFFFFF</color>
+    <color name="amoledThemeBackground">#000000</color>
+
+    <color name="amoledThemeOnSurfaceVariant">#98989D</color>
+    <color name="amoledThemeOnBackground">#FFFFFF</color>
+
+    <!-- Legacy/Redesign Mappings -->
+    <color name="md_theme_amoled_surface">#000000</color>
+    <color name="md_theme_amoled_background">#000000</color>
+
+    <color name="amoledThemeSnackbarBackgroundColor">#2C2C2E</color>
+    <color name="amoledThemeSnackbarTextColor">#FFFFFF</color>
+    <color name="amoledThemeSnackbarButtonColor">@color/miku_teal_light</color>
+
+    <!-- ========== Material Design 3 Color Tokens (Miku Themed) ========== -->
+    <!-- Light Theme -->
+    <color name="md_theme_light_primary">@color/miku_teal</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">@color/miku_teal_light</color>
+    <color name="md_theme_light_onPrimaryContainer">#00201E</color>
+    <color name="md_theme_light_secondary">@color/miku_pink</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">@color/miku_pink_light</color>
+    <color name="md_theme_light_onSecondaryContainer">#3E0021</color>
+    <color name="md_theme_light_surface">@color/miku_surface_light</color>
+    <color name="md_theme_light_onSurface">#202020</color>
+    <color name="md_theme_light_background">@color/miku_background_light</color>
+    <color name="md_theme_light_onBackground">#202020</color>
+
+    <!-- Dark Theme -->
+    <color name="md_theme_dark_primary">@color/miku_teal_light</color>
+    <color name="md_theme_dark_onPrimary">#003734</color>
+    <color name="md_theme_dark_primaryContainer">#00504B</color>
+    <color name="md_theme_dark_onPrimaryContainer">#9BFBF3</color>
+    <color name="md_theme_dark_secondary">@color/miku_pink_light</color>
+    <color name="md_theme_dark_onSecondary">#5E0036</color>
+    <color name="md_theme_dark_secondaryContainer">#83004C</color>
+    <color name="md_theme_dark_onSecondaryContainer">#FFD8EC</color>
+    <color name="md_theme_dark_surface">@color/miku_surface_dark</color>
+    <color name="md_theme_dark_onSurface">#E0E0E0</color>
+    <color name="md_theme_dark_background">@color/miku_background_dark</color>
+    <color name="md_theme_dark_onBackground">#E0E0E0</color>
+
+    <!-- ========== Additional Colors ========== -->
+    <!-- Miku Gradients -->
+    <color name="gradient_start">@color/miku_teal</color>
+    <color name="gradient_end">@color/miku_pink</color>
+
+    <!-- Placeholders -->
+    <color name="placeholder_background">#E0F2F1</color>
+    <color name="placeholder_shimmer">#B2DFDB</color>
+    <color name="error_placeholder">#FFCDD2</color>
+
+    <!-- Brand Colors (Legacy support mapping to Miku) -->
+    <color name="brand_primary">@color/miku_teal</color>
+    <color name="brand_accent">@color/miku_pink</color>
+
+    <!-- HTML Design Palette -->
+    <color name="html_base">#121212</color>
+    <color name="html_surface">#1E1E1E</color>
+    <color name="html_surface2">#2C2C2C</color>
+    <color name="html_primary">#B0C4DE</color>
+    <color name="html_onPrimary">#182B3A</color>
+    <color name="html_secondary">#CFBCFF</color>
+    <color name="html_tertiary">#EFB8C8</color>
+    <color name="html_outline">#444746</color>
+    <color name="html_text_secondary">#9CA3AF</color>
+    <color name="html_surface2_translucent">#E62C2C2C</color>
+    <color name="html_icon_blue">#3B82F6</color>
+    <color name="html_icon_purple">#A855F7</color>
+    <color name="html_icon_green">#22C55E</color>
+</resources>

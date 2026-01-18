@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ensure these values are picked up on tablets -->
+    <dimen name="grids_spacing">16dp</dimen>
+    <dimen name="cards_elevation">4dp</dimen>
+    <dimen name="small_components_corner_size">8dp</dimen>
+    <dimen name="cards_corner_size">16dp</dimen>
+    <dimen name="medium_components_corner_size">12dp</dimen>
+    <dimen name="large_components_corner_size">20dp</dimen>
+</resources>

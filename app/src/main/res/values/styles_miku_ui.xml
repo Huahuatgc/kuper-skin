@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MikuBox.CardView.SquareAction" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">100dp</item> <!-- Make them roughly square/tall -->
+        <item name="strokeWidth">0dp</item>
+    </style>
+    
+    <color name="miku_pink_state_list">@color/miku_pink</color>
+</resources>

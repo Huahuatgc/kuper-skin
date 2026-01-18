@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Increase height multiplier for taller, more elegant cards (e.g., 9:18 ratio approx) -->
+    <item name="heightMultiplier" format="float" type="dimen">1.6</item>
+    <!-- Adjust divider for list views if used -->
+    <item name="heightDivider" format="float" type="dimen">1.5</item>
+</resources>

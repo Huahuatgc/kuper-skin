@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kuper</string>
+    
+    <!-- Template Card -->
+    <string name="template_preview">Template preview</string>
+    <string name="template_actions">Template actions</string>
+</resources>

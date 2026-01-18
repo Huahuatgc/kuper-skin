@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 
+        Modern Spacing & Corner Radius
+        Larger, more generous values for a premium feel
+    -->
+    
+    <!-- Grid spacing - more breathing room -->
+    <dimen name="grids_spacing">12dp</dimen>
+    
+    <!-- Card elevation - subtle but visible -->
+    <dimen name="cards_elevation">4dp</dimen>
+    
+    <!-- Corner radii - modern rounded corners -->
+    <dimen name="small_components_corner_size">8dp</dimen>
+    <dimen name="cards_corner_size">16dp</dimen>
+    <dimen name="medium_components_corner_size">12dp</dimen>
+    <dimen name="large_components_corner_size">20dp</dimen>
+    
+    <!-- Additional spacing values for consistency -->
+    <dimen name="content_padding">16dp</dimen>
+    <dimen name="item_spacing">12dp</dimen>
+    <dimen name="section_spacing">24dp</dimen>
+</resources>

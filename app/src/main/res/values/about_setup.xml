@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation,MissingTranslation">
+    <!-- 开发者头像 (使用 GitHub 头像直链) -->
+    <string-array name="credits_photos" formatted="false" tools:ignore="TypographyDashes">
+        <item>https://github.com/Huahuatgc.png</item>
+    </string-array>
+
+    <!-- 开发者名称 -->
+    <string-array name="credits_titles">
+        <item>椛椛 (Huahuatgc)</item>
+    </string-array>
+
+    <!-- 开发者描述 -->
+    <string-array name="credits_descriptions">
+        <item>应用开发者与维护者 | KLWP 主题爱好者</item>
+    </string-array>
+
+    <!-- 社交媒体按钮标签 -->
+    <string-array name="credits_buttons">
+        <item>GitHub|网站|Twitter</item>
+    </string-array>
+
+    <!-- 社交媒体链接 -->
+    <string-array name="credits_links">
+        <item>https://github.com/Huahuatgc|https://m.zerozh.cn/|https://twitter.com/Mio</item>
+    </string-array>
+</resources>
