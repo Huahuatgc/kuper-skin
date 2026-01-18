@@ -27,3 +27,5 @@
 ## 开源协议
 
 本项目基于开源库开发。
+
+编译正式版 ：https://github.com/Huahuatgc/kuper-skin/actions/runs/21116884773
